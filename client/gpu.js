@@ -2,7 +2,7 @@ const EventEmitter = require('events');
 class GPU extends EventEmitter {
     constructor() {
         super()
-        this.bidMaps = []
+        this.bitMaps = []
     }
 }
 const gpu = new GPU();

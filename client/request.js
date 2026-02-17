@@ -4,10 +4,12 @@ const css = require("css");
 const main = require('./main.js');
 const network = require('./network.js');
 const render = require('./render.js');
-const { createCanvas } = require('canvas')
+const gpu = require('./gpu.js');
+const { createCanvas } = require('@napi-rs/canvas')
 const fs = require('fs')
+const path = require('path')
 const host = 'localhost';
-const port = 80;
+const port = 8000;
 
 const loadingLinks = {}
 const loadingScripts = {}
@@ -41,7 +43,9 @@ main.on('drawQuad', function () {
     const canvas = createCanvas(150, 250);
     const ctx = canvas.getContext('2d');
     eval(drawSteps.join('\r\n'));
-    fs.writeFileSync('result.png', canvas.toBuffer('image/png'));
+    const outputPath = path.join(__dirname, '..', 'result.png');
+    fs.writeFileSync(outputPath, canvas.toBuffer('image/png'));
+    console.log(`\n✅ 渲染完成！结果已保存到: ${outputPath}`);
 })
 
 /** 网络进程 **/
@@ -96,7 +100,7 @@ render.on('commitNavigation', function (response) {
              * 然后再构建DOM树，重新计算样式，构建布局树，绘制页面
              * @param {*} tagname 
              */
-            onclosetag() {
+            onclosetag(tagname) {
                 switch (tagname) {
                     case 'style':
                         const styleToken = tokenStack.top();
@@ -139,7 +143,7 @@ render.on('commitNavigation', function (response) {
                     default:
                         break;
                 }
-                tokenStack.pp();
+                tokenStack.pop();
             },
         });
         //开始接收响应体

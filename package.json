@@ -1,17 +1,38 @@
 {
   "name": "browser-core",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "一个用于学习浏览器渲染原理的迷你浏览器内核实现",
+  "main": "client/request.js",
   "scripts": {
-    "dev": "nodemon server/index.js"
+    "start": "node client/request.js",
+    "server": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "demo": "node server/index.js & sleep 1 && node client/request.js"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "browser",
+    "render",
+    "dom",
+    "css",
+    "layout",
+    "paint"
+  ],
+  "author": "Sunny-117",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sunny-117/browser-core"
+  },
   "dependencies": {
-    "canvas": "^2.11.2",
+    "@napi-rs/canvas": "^0.1.44",
     "css": "^3.0.0",
     "express": "^4.19.2",
     "htmlparser2": "^9.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
