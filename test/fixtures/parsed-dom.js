@@ -1,4 +1,15 @@
-let document = {
+/**
+ * HTML Parser 中间产物示例
+ *
+ * 对应 HTML:
+ * <html>
+ *   <body>
+ *     <div>hello===</div>
+ *     <div>world</div>
+ *   </body>
+ * </html>
+ */
+const parsedDOM = {
     type: 'document',
     children: [
         {
@@ -15,7 +26,7 @@ let document = {
                             children: [
                                 {
                                     type: 'text',
-                                    text: 'hello'
+                                    text: 'hello==='
                                 }
                             ]
                         },
@@ -34,4 +45,6 @@ let document = {
             ]
         }
     ]
-}
+};
+
+module.exports = parsedDOM;
