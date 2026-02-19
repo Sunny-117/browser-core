@@ -178,6 +178,7 @@ render.on('commitNavigation', function (response) {
                 //8.把绘制步骤交给渲染进程中的合成线程进行合成
                 //9.合成线程会把图层划分为图块(tile)
                 const tiles = splitTiles(paintSteps);
+                console.log(tiles, 'tilestiles')
                 //10.合成线程会把分好的图块发给栅格化线程池
                 raster(tiles);
                 console.log(layers);
